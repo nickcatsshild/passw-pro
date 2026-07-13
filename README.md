@@ -73,6 +73,7 @@ services:
       args:
         DB: sqlite,mysql,postgresql
         CARGO_PROFILE: release
+    image: passw-pro:latest
     container_name: passw-pro
     restart: unless-stopped
     ports:
