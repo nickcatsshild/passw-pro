@@ -8,7 +8,6 @@ services:
         DB: sqlite,mysql,postgresql
         # Build profile: release, dev
         CARGO_PROFILE: release
-    image: passw-pro/server:latest
     container_name: passw-pro
     restart: unless-stopped
     ports:

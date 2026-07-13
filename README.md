@@ -5,7 +5,7 @@ Uma solução opensource para gerenciar seus logins e senhas de acesso, fork do 
 
 ## Funcionalidades
 
-### Originais (Vaultwarden)
+### Adicionais (Passw-pro)
 
  * Cofre Pessoal
  * Send
@@ -20,9 +20,6 @@ Uma solução opensource para gerenciar seus logins e senhas de acesso, fork do 
  * Acesso de Emergência
  * Painel Admin do Passw-pro
  * Cliente Web Vault modificado (Incluso nos containers)
-
-### Adicionais (Passw-pro)
-
  * **Busca corrigida** — Endpoint `GET /api/ciphers/search` implementado (corrige erro 404 na busca do web vault)
  * **Página /organize** — Interface com drag-and-drop para organizar itens do cofre por pasta
  * **Botão "Organizar"** — Injetado dinamicamente no web vault para acesso rápido à organização
@@ -76,7 +73,6 @@ services:
       args:
         DB: sqlite,mysql,postgresql
         CARGO_PROFILE: release
-    image: passw-pro/server:latest
     container_name: passw-pro
     restart: unless-stopped
     ports:
