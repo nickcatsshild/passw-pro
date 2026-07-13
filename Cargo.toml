@@ -252,6 +252,10 @@ rpassword = "7.5.4"
 # Loading a dynamic CSS Stylesheet
 grass_compiler = { version = "0.13.4", default-features = false }
 
+# Archive creation/extraction for backup/restore
+tar = "0.4"
+flate2 = "1.1"
+
 # File are accessed through Apache OpenDAL
 opendal = { version = "0.57.0", default-features = false, features = ["services-fs"] }
 

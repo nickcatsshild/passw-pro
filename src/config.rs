@@ -1737,6 +1737,7 @@ where
     reg!("admin/users");
     reg!("admin/organizations");
     reg!("admin/diagnostics");
+    reg!("admin/backup");
 
     reg!("404");
 

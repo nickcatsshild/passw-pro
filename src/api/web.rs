@@ -295,6 +295,7 @@ pub fn static_files(filename: &str) -> Result<(ContentType, &'static [u8]), Erro
         }
         "organize.js" => Ok((ContentType::JavaScript, include_bytes!("../static/scripts/organize.js"))),
         "vault-dragdrop.js" => Ok((ContentType::JavaScript, include_bytes!("../static/scripts/vault-dragdrop.js"))),
+        "admin_backup.js" => Ok((ContentType::JavaScript, include_bytes!("../static/scripts/admin_backup.js"))),
         _ => err!(format!("Static file not found: {filename}")),
     }
 }

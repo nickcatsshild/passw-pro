@@ -43,7 +43,7 @@ pub fn routes() -> Vec<Route> {
         return routes![admin_disabled];
     }
 
-    routes![
+    let mut admin_routes = routes![
         get_users_json,
         get_user_json,
         get_user_by_mail_json,
@@ -71,7 +71,12 @@ pub fn routes() -> Vec<Route> {
         get_diagnostics_config,
         resend_user_invite,
         get_diagnostics_http,
-    ]
+    ];
+
+    let mut backup_routes = crate::api::admin_backup::routes();
+    admin_routes.append(&mut backup_routes);
+
+    admin_routes
 }
 
 pub fn catchers() -> Vec<Catcher> {

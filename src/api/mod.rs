@@ -1,4 +1,5 @@
 mod admin;
+mod admin_backup;
 pub mod core;
 mod icons;
 mod identity;
