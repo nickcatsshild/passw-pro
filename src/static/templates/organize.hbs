@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="icon" type="image/png" href="{{urlpath}}/vw_static/passw-pro-favicon.png">
+    <title>Organizar Cofre - Passw-pro</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a2e;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+        .organize-nav {
+            background: #16213e;
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            border-bottom: 1px solid #0f3460;
+        }
+        .organize-nav h1 {
+            font-size: 20px;
+            color: #fff;
+            flex: 1;
+        }
+        .organize-nav a {
+            color: #a0a0c0;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .organize-nav a:hover { color: #fff; }
+        .organize-container {
+            display: flex;
+            height: calc(100vh - 57px);
+        }
+        .organize-sidebar {
+            width: 280px;
+            background: #16213e;
+            padding: 16px;
+            overflow-y: auto;
+            border-right: 1px solid #0f3460;
+            flex-shrink: 0;
+        }
+        .organize-sidebar h2 {
+            font-size: 13px;
+            text-transform: uppercase;
+            color: #7a7a9a;
+            letter-spacing: 0.5px;
+            margin: 16px 0 8px;
+        }
+        .organize-sidebar h2:first-child { margin-top: 0; }
+        .organize-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .organize-filter {
+            padding: 12px 16px;
+            background: #16213e;
+            border-bottom: 1px solid #0f3460;
+        }
+        .organize-search {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #0f3460;
+            border-radius: 8px;
+            font-size: 14px;
+            background: #1a1a2e;
+            color: #e0e0e0;
+            outline: none;
+        }
+        .organize-search:focus { border-color: #4361ee; }
+        .organize-cipher-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px;
+        }
+        .organize-node {
+            padding: 8px 12px;
+            margin: 2px 0;
+            border-radius: 6px;
+            cursor: default;
+            font-size: 14px;
+            transition: background 0.15s;
+        }
+        .organize-dropzone {
+            cursor: grab;
+            border: 1px solid transparent;
+        }
+        .organize-dropzone:hover {
+            background: rgba(67, 97, 238, 0.15);
+        }
+        .organize-dropzone.drag-over {
+            background: rgba(67, 97, 238, 0.3);
+            border-color: #4361ee;
+        }
+        .organize-cipher-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            margin: 3px 0;
+            border-radius: 8px;
+            background: #16213e;
+            border: 1px solid #0f3460;
+            cursor: grab;
+            transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+            user-select: none;
+        }
+        .organize-cipher-item:hover {
+            background: #1a2745;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .organize-cipher-item.dragging {
+            opacity: 0.5;
+            transform: scale(0.97);
+        }
+        .cipher-icon { font-size: 18px; width: 28px; text-align: center; }
+        .cipher-name { flex: 1; font-size: 14px; font-weight: 500; }
+        .cipher-folder { font-size: 12px; color: #7a7a9a; }
+        .organize-toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 99999;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+            transition: opacity 0.4s;
+        }
+        .organize-toast.success { background: #2d6a4f; color: #fff; }
+        .organize-toast.error { background: #9b2226; color: #fff; }
+        .organize-toast.info { background: #4361ee; color: #fff; }
+        .organize-empty {
+            text-align: center;
+            padding: 48px 16px;
+            color: #7a7a9a;
+            font-size: 14px;
+        }
+        .organize-error {
+            text-align: center;
+            padding: 64px 16px;
+        }
+        .organize-error h2 { margin-bottom: 12px; color: #e0e0e0; }
+        .organize-error p { color: #7a7a9a; margin-bottom: 24px; }
+        .organize-btn {
+            display: inline-block;
+            padding: 10px 24px;
+            background: #4361ee;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .organize-btn:hover { background: #3a56d4; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1a1a2e; }
+        ::-webkit-scrollbar-thumb { background: #0f3460; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <nav class="organize-nav">
+        <h1>📦 Organizar Cofre</h1>
+        <a href="{{urlpath}}/">← Voltar ao cofre</a>
+    </nav>
+    <div id="app"></div>
+    <script src="{{urlpath}}/vw_static/organize.js"></script>
+</body>
+</html>
