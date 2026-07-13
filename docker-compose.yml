@@ -8,7 +8,7 @@ services:
     container_name: passw-pro
     restart: unless-stopped
     ports:
-      - "80:80"
+      - "1300:80"
       # Descomente para usar HTTPS diretamente (requer certificados)
       # - "443:443"
     volumes:
@@ -18,7 +18,7 @@ services:
       # - ./.env:/.env:ro
     environment:
       # Domínio público do servidor (OBRIGATÓRIO para U2F/WebAuthn, links de email)
-      DOMAIN: "https://example.com"
+      DOMAIN: "http://localhost:1300"
       # Permitir registro de novos usuários
       SIGNUPS_ALLOWED: "true"
       # Habilitar WebSocket para sincronização em tempo real

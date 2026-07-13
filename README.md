@@ -47,10 +47,10 @@ Execute o container:
 
 ```shell
 docker run --detach --name passw-pro \
-  --env DOMAIN="http://localhost" \
+  --env DOMAIN="http://localhost:1300" \
   --volume ./passw-data/:/data/ \
   --restart unless-stopped \
-  --publish 127.0.0.1:8000:80 \
+  --publish 127.0.0.1:1300:80 \
   passw-pro/server:latest
 ```
 
@@ -58,7 +58,7 @@ docker run --detach --name passw-pro \
 |---|---|
 | `DOMAIN` | Altere para seu domínio real. Para teste local use `http://localhost` |
 | `--volume` | Diretório onde os dados serão persistidos no host |
-| `--publish` | Mapeia a porta 80 do container para a porta 8000 do host |
+| `--publish` | Mapeia a porta 80 do container para a porta 1300 do host |
 
 ### 2. Docker Compose (recomendado)
 
@@ -72,11 +72,11 @@ services:
     container_name: passw-pro
     restart: unless-stopped
     ports:
-      - "80:80"
+      - "1300:80"
     volumes:
       - ./passw-data/:/data/
     environment:
-      DOMAIN: "http://localhost"
+      DOMAIN: "http://localhost:1300"
       SIGNUPS_ALLOWED: "true"
       # ADMIN_TOKEN: "seu-token-aqui"
     cap_drop:
@@ -119,7 +119,7 @@ cp .env.template .env
 Edite as variáveis principais no `.env`:
 
 ```ini
-DOMAIN=http://localhost
+DOMAIN=http://localhost:1300
 SIGNUPS_ALLOWED=true
 ADMIN_TOKEN=seu-token-admin-aqui
 ```
@@ -128,10 +128,10 @@ ADMIN_TOKEN=seu-token-admin-aqui
 
 ### 4. Acessar
 
-- **Web Vault:** http://localhost:8000
-- **Painel Admin:** http://localhost:8000/admin
-- **Health Check:** http://localhost:8000/alive
-- **Organizar Cofre:** http://localhost:8000/organize
+- **Web Vault:** http://localhost:1300
+- **Painel Admin:** http://localhost:1300/admin
+- **Health Check:** http://localhost:1300/alive
+- **Organizar Cofre:** http://localhost:1300/organize
 
 <br>
 
