@@ -1,17 +1,11 @@
 
-
-Uma alternativa open-source ao servidor Bitwarden, escrita em Rust e compatível com todos os clientes oficiais do Bitwarden. [[aviso](#aviso)]
+Uma solução opensource para gerenciar seus logins e senhas de acesso, fork do Vaultwarden com funcionalidades extras.
 
 ---
 
-> [!IMPORTANTE]
-> **Ao usar este servidor, reporte quaisquer bugs ou sugestões diretamente para nós (veja [Fale conosco](#fale-conosco)).**
-
-<br>
-
 ## Funcionalidades
 
-Uma implementação quase completa do Bitwarden Server, incluindo:
+### Originais (Vaultwarden)
 
  * Cofre Pessoal
  * Send
@@ -27,9 +21,13 @@ Uma implementação quase completa do Bitwarden Server, incluindo:
  * Painel Admin do Passw-pro
  * Cliente Web Vault modificado (Incluso nos containers)
 
+### Adicionais (Passw-pro)
+
+ * **Busca corrigida** — Endpoint `GET /api/ciphers/search` implementado (corrige erro 404 na busca do web vault)
+ * **Página /organize** — Interface com drag-and-drop para organizar itens do cofre por pasta
+ * **Botão "Organizar"** — Injetado dinamicamente no web vault para acesso rápido à organização
+
 <br>
-
-
 
 ## Instalação via Docker
 
@@ -38,22 +36,15 @@ Uma implementação quase completa do Bitwarden Server, incluindo:
 - [Docker](https://docs.docker.com/engine/install/) instalado
 - Ou [Podman](https://podman.io/) como alternativa
 
-### 1. Docker CLI (construir e executar)
-
-Clone o repositório e faça o build da imagem:
+### 1. Docker CLI
 
 ```shell
 git clone https://github.com/seu-usuario/passw-pro
 cd passw-pro
 docker build -t passw-pro/server .
-```
-
-Execute o container:
-
-```shell
 docker run --detach --name passw-pro \
   --env DOMAIN="http://localhost" \
-  --volume /caminho/para/dados/:/data/ \
+  --volume ./passw-data/:/data/ \
   --restart unless-stopped \
   --publish 127.0.0.1:8000:80 \
   passw-pro/server:latest
@@ -67,44 +58,21 @@ docker run --detach --name passw-pro \
 
 ### 2. Docker Compose (recomendado)
 
-O projeto já inclui um arquivo `docker-compose.yml` pronto para uso. Execute:
-
 ```shell
-# Clone o repositório
 git clone https://github.com/seu-usuario/passw-pro
 cd passw-pro
-
-# (Opcional) Edite as variáveis de ambiente
-notepad .env
-# ou no Linux: nano .env
-
-# Construa e inicie o container
 docker compose up --build --detach
-
-# Para ver os logs
-docker compose logs --follow
-
-# Para parar o container
-docker compose down
 ```
 
-O arquivo `docker-compose.yml` incluído já contém:
-
-- Build automático a partir do código fonte
-- Persistência de dados no diretório `./passw-data/`
-- Healthcheck configurado
-- Boas práticas de segurança (cap_drop, no-new-privileges)
-- Suporte comentado para MySQL e PostgreSQL
+O `docker-compose.yml` já inclui: build automático, persistência em `./passw-data/`, healthcheck, e suporte comentado para MySQL/PostgreSQL.
 
 ### 3. Configuração
-
-Crie um arquivo `.env` na raiz do projeto (copie do `.env.template`):
 
 ```shell
 cp .env.template .env
 ```
 
-Edite as variáveis principais:
+Edite as variáveis principais no `.env`:
 
 ```ini
 DOMAIN=http://localhost
@@ -112,20 +80,17 @@ SIGNUPS_ALLOWED=true
 ADMIN_TOKEN=seu-token-admin-aqui
 ```
 
-> Para gerar um `ADMIN_TOKEN` seguro, execute: `docker run --rm passw-pro/server hash`
+> Para gerar um `ADMIN_TOKEN` seguro: `docker run --rm passw-pro/server hash`
 
 ### 4. Acessar
 
 - **Web Vault:** http://localhost:8000
 - **Painel Admin:** http://localhost:8000/admin
 - **Health Check:** http://localhost:8000/alive
+- **Organizar Cofre:** http://localhost:8000/organize
 
 <br>
 
-
 ## Aviso
 
-**eSTA EM DESENVOLVIEMNTO NÃO USAR EM PROD.**
-
-
-
+**Projeto em desenvolvimento — não usar em produção.**
