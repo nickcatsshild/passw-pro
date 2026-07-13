@@ -29,12 +29,7 @@ Uma implementação quase completa do Bitwarden Server, incluindo:
 
 <br>
 
-## Uso
 
-> [!IMPORTANTE]
-> O web-vault exige HTTPS e um contexto seguro para a [Web Crypto API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API). <br>
-> Isso significa que só funcionará se você [habilitar HTTPS](https://github.com/dani-garcia/vaultwarden/wiki/Enabling-HTTPS). <br>
-> Recomendamos também o uso de um [proxy reverso](https://github.com/dani-garcia/vaultwarden/wiki/Proxy-examples).
 
 ## Instalação via Docker
 
@@ -57,7 +52,7 @@ Execute o container:
 
 ```shell
 docker run --detach --name passw-pro \
-  --env DOMAIN="https://exemplo.com" \
+  --env DOMAIN="http://localhost" \
   --volume /caminho/para/dados/:/data/ \
   --restart unless-stopped \
   --publish 127.0.0.1:8000:80 \
@@ -66,7 +61,7 @@ docker run --detach --name passw-pro \
 
 | Parâmetro | Descrição |
 |---|---|
-| `DOMAIN` | Altere para seu domínio real (obrigatório para HTTPS/WebAuthn) |
+| `DOMAIN` | Altere para seu domínio real. Para teste local use `http://localhost` |
 | `--volume` | Diretório onde os dados serão persistidos no host |
 | `--publish` | Mapeia a porta 80 do container para a porta 8000 do host |
 
@@ -112,7 +107,7 @@ cp .env.template .env
 Edite as variáveis principais:
 
 ```ini
-DOMAIN=https://exemplo.com
+DOMAIN=http://localhost
 SIGNUPS_ALLOWED=true
 ADMIN_TOKEN=seu-token-admin-aqui
 ```
@@ -127,27 +122,10 @@ ADMIN_TOKEN=seu-token-admin-aqui
 
 <br>
 
-## Fale conosco
-
-Tem uma pergunta, sugestão ou precisa de ajuda? Participe da nossa comunidade no [Matrix](https://matrix.to/#/#vaultwarden:matrix.org), [Discussões do GitHub](https://github.com/dani-garcia/vaultwarden/discussions) ou [Fórum Discourse](https://vaultwarden.discourse.group/).
-
-Encontrou um bug ou falha? Pesquise nosso rastreador de issues e discussões para ver se já foi reportado. Se não, [inicie uma nova discussão](https://github.com/dani-garcia/vaultwarden/discussions) ou [crie uma nova issue](https://github.com/dani-garcia/vaultwarden/issues/). Certifique-se de estar usando a versão mais recente do Passw-pro e que não há issues similares abertas ou fechadas!
-
-<br>
 
 ## Aviso
 
-**Este projeto não é associado ao [Bitwarden](https://bitwarden.com/) ou à Bitwarden, Inc.**
+**eSTA EM DESENVOLVIEMNTO NÃO USAR EM PROD.**
 
-No entanto, um dos mantenedores ativos do Passw-pro é funcionário da Bitwarden e tem permissão para contribuir com o projeto em seu tempo livre. Essas contribuições são independentes da Bitwarden e são revisadas por outros mantenedores.
 
-Os mantenedores trabalham juntos para definir a direção do projeto, focando em atender a comunidade de auto-hospedagem, incluindo indivíduos, famílias e pequenas organizações, garantindo a sustentabilidade do projeto.
 
-**Observação:** Não podemos ser responsabilizados por qualquer perda de dados que possa ocorrer ao usar o Passw-pro. Isso inclui senhas, anexos e outras informações manipuladas pela aplicação. Recomendamos fortemente a realização de backups regulares dos seus arquivos e banco de dados. No entanto, se você tiver perda de dados, encorajamos você a nos contatar imediatamente.
-
-<br>
-
-## Bitwarden_RS
-
-Este projeto era conhecido como Bitwarden_RS (depois Vaultwarden) e foi renomeado para Passw-pro.<br>
-Veja [#1642 - v1.21.0 release e renomeação do projeto](https://github.com/dani-garcia/vaultwarden/discussions/1642) para mais explicações.
