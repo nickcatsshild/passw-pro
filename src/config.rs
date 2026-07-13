@@ -1742,6 +1742,7 @@ where
     reg!("404");
 
     reg!("organize");
+    reg!("dashboard");
 
     reg!(@withfallback "scss/passw-pro.scss");
     reg!("scss/user.passw-pro.scss");

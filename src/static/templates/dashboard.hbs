@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Passw-pro</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1b23;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+        .dash-nav {
+            display: flex; align-items: center; gap: 12px;
+            padding: 12px 24px; background: #24253a;
+            border-bottom: 1px solid #333;
+        }
+        .dash-nav a {
+            color: #a0a0c0; text-decoration: none; font-size: 14px;
+        }
+        .dash-nav a:hover { color: #fff; }
+        .dash-nav h1 {
+            font-size: 18px; font-weight: 600; color: #fff; margin-right: auto;
+        }
+        #app { max-width: 900px; margin: 0 auto; padding: 24px; }
+        .dash-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px; margin-bottom: 24px;
+        }
+        .dash-card {
+            background: #24253a; border-radius: 10px;
+            padding: 20px; text-align: center;
+            border: 1px solid #333; transition: transform 0.15s;
+        }
+        .dash-card:hover { transform: translateY(-2px); border-color: #4361ee; }
+        .dash-card.warn { border-color: #e6a817; }
+        .dash-card.info { border-color: #4361ee; }
+        .dash-number { font-size: 28px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+        .dash-card.small .dash-number { font-size: 22px; }
+        .dash-label { font-size: 12px; color: #8888aa; text-transform: uppercase; letter-spacing: 0.5px; }
+        .dash-section { margin-bottom: 24px; }
+        .dash-section-title {
+            font-size: 16px; font-weight: 600; color: #ccc;
+            margin-bottom: 12px; padding-bottom: 8px;
+            border-bottom: 1px solid #333;
+        }
+        .dash-error {
+            text-align: center; padding: 60px 20px;
+        }
+        .dash-error h2 { color: #e6a817; margin-bottom: 12px; }
+        .dash-error p { color: #888; margin-bottom: 20px; }
+        .dash-btn {
+            display: inline-block; padding: 10px 24px;
+            background: #4361ee; color: #fff; border-radius: 8px;
+            text-decoration: none; border: none; cursor: pointer;
+            font-size: 14px;
+        }
+        .dash-btn:hover { background: #3651d4; }
+        .age-grid .dash-card:first-child { border-color: #2d6a4f; }
+        .age-grid .dash-card:last-child { border-color: #9b2226; }
+    </style>
+</head>
+<body>
+    <nav class="dash-nav">
+        <h1>📊 Dashboard</h1>
+        <a href="{{urlpath}}/">← Voltar ao cofre</a>
+        <a href="{{urlpath}}/organize">📦 Organizar</a>
+    </nav>
+    <div id="app">
+        <div style="text-align:center;padding:60px">
+            <div style="display:inline-block;width:40px;height:40px;border:3px solid #4361ee;border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite"></div>
+            <p style="color:#888;margin-top:12px">Carregando estatísticas...</p>
+        </div>
+    </div>
+    <style>
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+    <script src="{{urlpath}}/vw_static/dashboard.js"></script>
+</body>
+</html>

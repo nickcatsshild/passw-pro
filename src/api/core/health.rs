@@ -6,7 +6,7 @@ use crate::{
     auth::Headers,
     db::{
         DbConn,
-        models::{Cipher, Folder, Organization, User},
+        models::{Cipher, Folder},
     },
     api::JsonResult,
 };
@@ -32,7 +32,6 @@ async fn vault_stats(headers: Headers, conn: DbConn) -> JsonResult {
     let mut orphan_count = 0u64;
 
     let now = Utc::now().naive_utc();
-    let folder_ids: std::collections::HashSet<_> = folders.iter().map(|f| f.uuid.clone()).collect();
 
     for c in &ciphers {
         *by_type.entry(c.atype).or_insert(0u64) += 1;
@@ -75,16 +74,16 @@ async fn vault_stats(headers: Headers, conn: DbConn) -> JsonResult {
         organizations::table.count().first::<i64>(conn).ok().unwrap_or(0)
     }).await;
 
-    let type_names: std::collections::HashMap<&str, &str> = [
-        ("1", "Login"),
-        ("2", "SecureNote"),
-        ("3", "Card"),
-        ("4", "Identity"),
-        ("5", "SshKey"),
-    ].iter().cloned().collect();
-
     let by_type_json: Value = by_type.iter().map(|(k, v)| {
-        (type_names.get(&k.to_string().as_str()).unwrap_or(&"Unknown"), json!(v))
+        let name = match k {
+            1 => "Login",
+            2 => "SecureNote",
+            3 => "Card",
+            4 => "Identity",
+            5 => "SshKey",
+            _ => "Unknown",
+        };
+        (name, json!(v))
     }).collect();
 
     Ok(Json(json!({

@@ -200,6 +200,16 @@
             'margin-left:8px;border-radius:6px;text-decoration:none;' +
             'font-size:13px;color:#fff;background:#4361ee;cursor:pointer;';
         nav.appendChild(btn);
+
+        var dashBtn = document.createElement('a');
+        dashBtn.className = 'pw-dash-btn';
+        dashBtn.href = window.location.origin + '/dashboard';
+        dashBtn.textContent = '📊 Saúde';
+        dashBtn.style.cssText =
+            'display:inline-flex;align-items:center;gap:4px;padding:6px 12px;' +
+            'margin-left:4px;border-radius:6px;text-decoration:none;' +
+            'font-size:13px;color:#fff;background:#2d6a4f;cursor:pointer;';
+        nav.appendChild(dashBtn);
     }
 
     function showToast(msg, type) {

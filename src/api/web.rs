@@ -26,7 +26,7 @@ const INJECTED_SCRIPT: &str = r#"<script src="/vw_static/vault-dragdrop.js"></sc
 pub fn routes() -> Vec<Route> {
     // If adding more routes here, consider also adding them to
     // crate::utils::LOGGED_ROUTES to make sure they appear in the log
-    let mut routes = routes![attachments, alive, alive_head, static_files, organize];
+    let mut routes = routes![attachments, alive, alive_head, static_files, organize, dashboard];
     if CONFIG.web_vault_enabled() {
         routes.append(&mut routes![
             web_index,
@@ -140,6 +140,15 @@ fn organize() -> ApiResult<Html<String>> {
         "urlpath": CONFIG.domain_path()
     });
     let text = CONFIG.render_template("organize", &json)?;
+    Ok(Html(text))
+}
+
+#[get("/dashboard")]
+fn dashboard() -> ApiResult<Html<String>> {
+    let json = json!({
+        "urlpath": CONFIG.domain_path()
+    });
+    let text = CONFIG.render_template("dashboard", &json)?;
     Ok(Html(text))
 }
 
@@ -294,6 +303,7 @@ pub fn static_files(filename: &str) -> Result<(ContentType, &'static [u8]), Erro
             Ok((ContentType::JavaScript, include_bytes!("../static/scripts/jquery-4.0.0.slim.js")))
         }
         "organize.js" => Ok((ContentType::JavaScript, include_bytes!("../static/scripts/organize.js"))),
+        "dashboard.js" => Ok((ContentType::JavaScript, include_bytes!("../static/scripts/dashboard.js"))),
         "vault-dragdrop.js" => Ok((ContentType::JavaScript, include_bytes!("../static/scripts/vault-dragdrop.js"))),
         "admin_backup.js" => Ok((ContentType::JavaScript, include_bytes!("../static/scripts/admin_backup.js"))),
         _ => err!(format!("Static file not found: {filename}")),
