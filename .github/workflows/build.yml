@@ -18,12 +18,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Debug - list files
-        run: ls -la
-
-      - name: Debug - check Dockerfile
-        run: head -5 Dockerfile
-
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
@@ -33,7 +27,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t passw-pro:latest . 2>&1
+          docker build --progress=plain -t passw-pro:latest . 2>&1
 
       - name: Tag and push
         if: success()
