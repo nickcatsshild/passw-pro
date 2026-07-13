@@ -38,10 +38,17 @@ Uma solução opensource para gerenciar seus logins e senhas de acesso, fork do 
 
 ### 1. Docker CLI
 
+O `Dockerfile` já está incluso no projeto. Build da imagem:
+
 ```shell
 git clone https://github.com/seu-usuario/passw-pro
 cd passw-pro
 docker build -t passw-pro/server .
+```
+
+Execute o container:
+
+```shell
 docker run --detach --name passw-pro \
   --env DOMAIN="http://localhost" \
   --volume ./passw-data/:/data/ \
@@ -58,13 +65,58 @@ docker run --detach --name passw-pro \
 
 ### 2. Docker Compose (recomendado)
 
+Crie um arquivo `docker-compose.yml` na raiz do projeto:
+
+```yaml
+services:
+  passw-pro:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        DB: sqlite,mysql,postgresql
+        CARGO_PROFILE: release
+    image: passw-pro/server:latest
+    container_name: passw-pro
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./passw-data/:/data/
+    environment:
+      DOMAIN: "http://localhost"
+      SIGNUPS_ALLOWED: "true"
+      # ADMIN_TOKEN: "seu-token-aqui"
+    cap_drop:
+      - ALL
+    cap_add:
+      - CAP_NET_BIND_SERVICE
+      - CAP_CHOWN
+      - CAP_SETUID
+      - CAP_SETGID
+    security_opt:
+      - no-new-privileges:yes
+    healthcheck:
+      test: ["CMD", "/healthcheck.sh"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    networks:
+      - passw-pro-network
+
+networks:
+  passw-pro-network:
+    driver: bridge
+```
+
+Execute:
+
 ```shell
-git clone https://github.com/seu-usuario/passw-pro
-cd passw-pro
 docker compose up --build --detach
 ```
 
-O `docker-compose.yml` já inclui: build automático, persistência em `./passw-data/`, healthcheck, e suporte comentado para MySQL/PostgreSQL.
+> Para usar MySQL ou PostgreSQL, descomente os blocos correspondentes no `docker-compose.yml`.
 
 ### 3. Configuração
 
