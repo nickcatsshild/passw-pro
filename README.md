@@ -67,13 +67,7 @@ Crie um arquivo `docker-compose.yml` na raiz do projeto:
 ```yaml
 services:
   passw-pro:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        DB: sqlite,mysql,postgresql
-        CARGO_PROFILE: release
-    image: passw-pro:latest
+    image: ghcr.io/nickcatsshild/passw-pro:latest
     container_name: passw-pro
     restart: unless-stopped
     ports:

@@ -1,14 +1,6 @@
 services:
   passw-pro:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        # Database backends to enable: sqlite, mysql, postgresql
-        DB: sqlite,mysql,postgresql
-        # Build profile: release, dev
-        CARGO_PROFILE: release
-    image: passw-pro:latest
+    image: ghcr.io/nickcatsshild/passw-pro:latest
     container_name: passw-pro
     restart: unless-stopped
     ports:
