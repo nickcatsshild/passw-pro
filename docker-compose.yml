@@ -1,5 +1,9 @@
 services:
   passw-pro:
+    # Para usar esta imagem, primeiro faça login no ghcr.io:
+    #   docker login ghcr.io -u nickcatsshild -p <GITHUB_TOKEN>
+    # Ou torne o pacote público em:
+    #   https://github.com/nickcatsshild/passw-pro/pkgs/container/passw-pro
     image: ghcr.io/nickcatsshild/passw-pro:latest
     container_name: passw-pro
     restart: unless-stopped

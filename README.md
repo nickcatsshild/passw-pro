@@ -67,6 +67,7 @@ Crie um arquivo `docker-compose.yml` na raiz do projeto:
 ```yaml
 services:
   passw-pro:
+    # Primeiro faça login: docker login ghcr.io -u nickcatsshild -p <GITHUB_TOKEN>
     image: ghcr.io/nickcatsshild/passw-pro:latest
     container_name: passw-pro
     restart: unless-stopped
