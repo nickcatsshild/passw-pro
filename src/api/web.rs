@@ -272,8 +272,6 @@ pub fn static_files(filename: &str) -> Result<(ContentType, &'static [u8]), Erro
         "logo-gray.png" => Ok((ContentType::PNG, include_bytes!("../static/images/logo-gray.png"))),
         "error-x.svg" => Ok((ContentType::SVG, include_bytes!("../static/images/error-x.svg"))),
         "hibp.png" => Ok((ContentType::PNG, include_bytes!("../static/images/hibp.png"))),
-        "vaultwarden-icon.png" => Ok((ContentType::PNG, include_bytes!("../static/images/vaultwarden-icon.png"))),
-        "vaultwarden-favicon.png" => Ok((ContentType::PNG, include_bytes!("../static/images/vaultwarden-favicon.png"))),
         "passw-pro-icon.png" => Ok((ContentType::PNG, include_bytes!("../static/images/passw-pro-icon.png"))),
         "passw-pro-favicon.png" => Ok((ContentType::PNG, include_bytes!("../static/images/passw-pro-favicon.png"))),
         "404.css" => Ok((ContentType::CSS, include_bytes!("../static/scripts/404.css"))),

@@ -208,10 +208,10 @@ export async function startVault(browser: Browser, testInfo: TestInfo, env = {},
 
 export async function stopVault(force: boolean = false) {
     if( force === false && process.env.PW_KEEP_SERVICE_RUNNNING === "true" ) {
-        console.log(`Keep vaultwarden running on: ${process.env.DOMAIN}`);
+        console.log(`Keep passw-pro running on: ${process.env.DOMAIN}`);
     } else {
-        console.log(`Vaultwarden stopping`);
-        execSync(`docker compose --profile playwright --env-file test.env stop Vaultwarden`);
+        console.log(`Passw-pro stopping`);
+        execSync(`docker compose --profile playwright --env-file test.env stop PasswPro`);
     }
 }
 

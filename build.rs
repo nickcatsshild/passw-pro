@@ -30,13 +30,13 @@ fn main() {
     println!("cargo:rerun-if-changed=.git/index");
     println!("cargo:rerun-if-changed=.git/refs/tags");
 
-    // Support $BWRS_VERSION for legacy compatibility, but default to $VW_VERSION.
+    // Support $BWRS_VERSION for legacy compatibility, but default to $PW_VERSION.
     // If neither exist, read from git.
-    let maybe_vaultwarden_version =
-        env::var("VW_VERSION").or_else(|_| env::var("BWRS_VERSION")).or_else(|_| version_from_git_info());
+    let maybe_pw_version =
+        env::var("PW_VERSION").or_else(|_| env::var("BWRS_VERSION")).or_else(|_| version_from_git_info());
 
-    if let Ok(version) = maybe_vaultwarden_version {
-        println!("cargo:rustc-env=VW_VERSION={version}");
+    if let Ok(version) = maybe_pw_version {
+        println!("cargo:rustc-env=PW_VERSION={version}");
         println!("cargo:rustc-env=CARGO_PKG_VERSION={version}");
     }
 }

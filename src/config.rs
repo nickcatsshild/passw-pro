@@ -1677,7 +1677,7 @@ where
     hb.register_helper("case", Box::new(case_helper));
     hb.register_helper("to_json", Box::new(to_json));
     hb.register_helper("webver", Box::new(webver));
-    hb.register_helper("vwver", Box::new(vwver));
+    hb.register_helper("pwver", Box::new(pwver));
 
     macro_rules! reg {
         ($name:expr) => {{
@@ -1806,11 +1806,11 @@ static WEB_VAULT_VERSION: LazyLock<semver::Version> = LazyLock::new(|| {
 
 // Configure the Passw-pro version as an integer so it can be used as a comparison smaller or greater then.
 // The default is based upon the version since this feature is added.
-static VW_VERSION: LazyLock<semver::Version> = LazyLock::new(|| {
-    let vw_version = crate::VERSION.unwrap_or("1.32.5");
+static PW_VERSION: LazyLock<semver::Version> = LazyLock::new(|| {
+    let pw_version = crate::VERSION.unwrap_or("1.32.5");
     // Use a single regex capture to extract version components
     let re = regex::Regex::new(r"(\d{1})\.(\d{1,2})\.(\d{1,2})").unwrap();
-    re.captures(vw_version)
+    re.captures(pw_version)
         .and_then(|c| {
             (c.len() == 4).then(|| {
                 format!("{}.{}.{}", c.get(1).unwrap().as_str(), c.get(2).unwrap().as_str(), c.get(3).unwrap().as_str())
@@ -1823,6 +1823,6 @@ static VW_VERSION: LazyLock<semver::Version> = LazyLock::new(|| {
 handlebars::handlebars_helper!(webver: | web_vault_version: String |
     semver::VersionReq::parse(&web_vault_version).expect("Invalid web-vault version compare string").matches(&WEB_VAULT_VERSION)
 );
-handlebars::handlebars_helper!(vwver: | vw_version: String |
-    semver::VersionReq::parse(&vw_version).expect("Invalid Passw-pro version compare string").matches(&VW_VERSION)
+handlebars::handlebars_helper!(pwver: | pw_version: String |
+    semver::VersionReq::parse(&pw_version).expect("Invalid Passw-pro version compare string").matches(&PW_VERSION)
 );

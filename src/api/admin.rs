@@ -652,13 +652,13 @@ async fn get_release_info(has_http_access: bool) -> (String, String, String) {
     // If the HTTP Check failed, do not even attempt to check for new versions since we were not able to connect with github.com anyway.
     if has_http_access {
         (
-            match get_json_api::<GitRelease>("https://api.github.com/repos/dani-garcia/vaultwarden/releases/latest")
+            match get_json_api::<GitRelease>("https://api.github.com/repos/nickcatsshild/passw-pro/releases/latest")
                 .await
             {
                 Ok(r) => r.tag_name,
                 _ => "-".to_owned(),
             },
-            match get_json_api::<GitCommit>("https://api.github.com/repos/dani-garcia/vaultwarden/commits/main").await {
+            match get_json_api::<GitCommit>("https://api.github.com/repos/nickcatsshild/passw-pro/commits/main").await {
                 Ok(mut c) => {
                     c.sha.truncate(8);
                     c.sha
@@ -735,7 +735,7 @@ async fn diagnostics(_token: AdminToken, ip_header: IpHeader, conn: DbConn) -> A
         _ => "Unable to resolve domain name.".to_owned(),
     };
 
-    let (latest_vw_release, latest_vw_commit, latest_web_release) = get_release_info(has_http_access).await;
+    let (latest_pw_release, latest_pw_commit, latest_web_release) = get_release_info(has_http_access).await;
     let active_web_release = get_active_web_release();
     let web_vault_compare = web_vault_compare(&active_web_release, &latest_web_release);
 
@@ -751,8 +751,8 @@ async fn diagnostics(_token: AdminToken, ip_header: IpHeader, conn: DbConn) -> A
     let diagnostics_json = json!({
         "dns_resolved": dns_resolved,
         "current_release": VERSION,
-        "latest_release": latest_vw_release,
-        "latest_commit": latest_vw_commit,
+        "latest_release": latest_pw_release,
+        "latest_commit": latest_pw_commit,
         "web_vault_enabled": &CONFIG.web_vault_enabled(),
         "active_web_release": active_web_release,
         "latest_web_release": latest_web_release,

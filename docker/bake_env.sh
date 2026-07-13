@@ -5,10 +5,10 @@ if [ -z "${SOURCE_COMMIT+x}" ]; then
     SOURCE_COMMIT="$(git rev-parse HEAD)"
 fi
 
-# If VW_VERSION is provided via env use it as SOURCE_VERSION
+# If PW_VERSION is provided via env use it as SOURCE_VERSION
 # Else define it using git
-if [[ -n "${VW_VERSION}" ]]; then
-    SOURCE_VERSION="${VW_VERSION}"
+if [[ -n "${PW_VERSION}" ]]; then
+    SOURCE_VERSION="${PW_VERSION}"
 else
     GIT_EXACT_TAG="$(git describe --tags --abbrev=0 --exact-match 2>/dev/null)"
     if [[ -n "${GIT_EXACT_TAG}" ]]; then

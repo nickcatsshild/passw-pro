@@ -55,7 +55,7 @@ fi
 
 # Set the default CONTAINER_REGISTRIES if non are provided
 if [[ -z "${CONTAINER_REGISTRIES}" ]]; then
-    CONTAINER_REGISTRIES="vaultwarden/server"
+    CONTAINER_REGISTRIES="passw-pro/server"
 fi
 
 # Check which Dockerfile we need to use, default is debian

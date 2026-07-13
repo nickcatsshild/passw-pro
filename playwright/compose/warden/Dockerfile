@@ -1,4 +1,4 @@
-FROM playwright_oidc_vaultwarden_prebuilt AS prebuilt
+FROM playwright_oidc_passw-pro_prebuilt AS prebuilt
 
 FROM node:22-trixie AS build
 
@@ -34,7 +34,7 @@ RUN mkdir /data && \
 WORKDIR /
 
 COPY --from=prebuilt /start.sh .
-COPY --from=prebuilt /vaultwarden .
+COPY --from=prebuilt /passw-pro .
 COPY --from=build /web-vault ./web-vault
 
 ENTRYPOINT ["/start.sh"]

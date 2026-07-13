@@ -220,7 +220,7 @@ WORKDIR /
 COPY docker/healthcheck.sh docker/start.sh /
 
 COPY --from=vault /web-vault ./web-vault
-COPY --from=build /app/target/final/vaultwarden .
+COPY --from=build /app/target/final/passw-pro .
 
 HEALTHCHECK --interval=60s --timeout=10s CMD ["/healthcheck.sh"]
 

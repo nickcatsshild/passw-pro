@@ -6,8 +6,8 @@ echo $COMMIT_HASH
 if [[ ! -z "$REPO_URL" ]] && [[ ! -z "$COMMIT_HASH" ]] ; then
     rm -rf /web-vault
 
-    mkdir -p vw_web_builds;
-    cd vw_web_builds;
+    mkdir -p pw_web_builds;
+    cd pw_web_builds;
 
     git -c init.defaultBranch=main init
     git remote add origin "$REPO_URL"

@@ -117,7 +117,7 @@ PRESETS:                  m=         t=          p=
 
 ";
 
-pub const VERSION: Option<&str> = option_env!("VW_VERSION");
+pub const VERSION: Option<&str> = option_env!("PW_VERSION");
 
 fn parse_args() {
     let mut pargs = pico_args::Arguments::from_env();
